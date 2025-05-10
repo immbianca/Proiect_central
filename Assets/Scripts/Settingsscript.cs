@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,49 +13,60 @@ public class Settingsscript : MonoBehaviour
     int SelectedRezolution;
     List<Resolution> SelectedResolutionList = new List<Resolution>();
 
-    private void Start()
+    void Start()
     {
         AllRezolutions = Screen.resolutions;
-
         List<string> resolutiomStringList = new List<string>();
-        string newRes;
-
         int currentResolutionIndex = 0;
+
         for (int i = 0; i < AllRezolutions.Length; i++)
         {
-            Resolution resolution = AllRezolutions[i];
-            newRes = resolution.width.ToString() + " x " + resolution.height.ToString();
-            if (!resolutiomStringList.Contains(newRes))
+            Resolution res = AllRezolutions[i];
+            string resString = res.width + " x " + res.height;
+            if (!resolutiomStringList.Contains(resString))
             {
-                resolutiomStringList.Add(newRes);
-                SelectedResolutionList.Add(resolution);
+                resolutiomStringList.Add(resString);
+                SelectedResolutionList.Add(res);
 
-              
-                if (resolution.width == Screen.width && resolution.height == Screen.height)
-                {
+                if (res.width == Screen.width && res.height == Screen.height)
                     currentResolutionIndex = SelectedResolutionList.Count - 1;
-                }
             }
         }
 
         Rezolutiedrop.AddOptions(resolutiomStringList);
 
+        if (PlayerPrefs.HasKey("resolutionIndex"))
+            currentResolutionIndex = PlayerPrefs.GetInt("resolutionIndex");
+        if (PlayerPrefs.HasKey("isFullscreen"))
+            isFullscreen = PlayerPrefs.GetInt("isFullscreen") == 1;
+        else
+            isFullscreen = Screen.fullScreen;
+
         Rezolutiedrop.value = currentResolutionIndex;
         SelectedRezolution = currentResolutionIndex;
-
-        isFullscreen = Screen.fullScreen;
         Fullscreen.isOn = isFullscreen;
+
+        Screen.SetResolution(SelectedResolutionList[currentResolutionIndex].width, SelectedResolutionList[currentResolutionIndex].height, isFullscreen);
     }
 
     public void SetResolution()
     {
         SelectedRezolution = Rezolutiedrop.value;
-        Screen.SetResolution(SelectedResolutionList[SelectedRezolution].width, SelectedResolutionList[SelectedRezolution].height, isFullscreen);
+        ApplySettings();
+        PlayerPrefs.SetInt("resolutionIndex", SelectedRezolution);
+        PlayerPrefs.Save();
     }
 
     public void SetFullscreen()
     {
         isFullscreen = Fullscreen.isOn;
+        ApplySettings();
+        PlayerPrefs.SetInt("isFullscreen", isFullscreen ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    void ApplySettings()
+    {
         Screen.SetResolution(SelectedResolutionList[SelectedRezolution].width, SelectedResolutionList[SelectedRezolution].height, isFullscreen);
     }
 
@@ -65,3 +75,4 @@ public class Settingsscript : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 }
+
