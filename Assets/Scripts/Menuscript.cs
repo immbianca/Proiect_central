@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu: MonoBehaviour
 {
+    private static bool initialized = false;
     public void playButton()
     {
         SceneManager.LoadScene("Game");
@@ -24,4 +25,14 @@ public class MainMenu: MonoBehaviour
         Application.Quit();
         Debug.Log("Quit");
     }
+    void Awake()
+    {
+        if (!initialized)
+        {
+            Resolution currentResolution = Screen.currentResolution;
+            Screen.SetResolution(currentResolution.width, currentResolution.height, Screen.fullScreen);
+            initialized = true;
+        } 
+    }
+
 }
