@@ -30,7 +30,6 @@ public class TextManager : MonoBehaviour
         selectedTextIndex = index;
         PlayerPrefs.SetInt("SelectedFontIndex", selectedTextIndex);
         PlayerPrefs.Save();
-        ApplyFont();
     }
 
     public void ApplyFont()

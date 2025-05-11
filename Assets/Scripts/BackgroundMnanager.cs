@@ -34,7 +34,6 @@ public class BackgroundManager : MonoBehaviour
             selectedBackgroundIndex = index;
             PlayerPrefs.SetInt("BackgroundIndex", selectedBackgroundIndex);
             PlayerPrefs.Save();
-            ApplyBackground();
     }
     public void ApplyBackground()
     {

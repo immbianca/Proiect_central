@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Settingsscript : MonoBehaviour
 {
+    public GameObject meniupopup;
     public Dropdown Rezolutiedrop;
     public Toggle Fullscreen;
+    bool saved = false;
 
     Resolution[] AllRezolutions;
     bool isFullscreen;
@@ -52,7 +54,6 @@ public class Settingsscript : MonoBehaviour
     public void SetResolution()
     {
         SelectedRezolution = Rezolutiedrop.value;
-        ApplySettings();
         PlayerPrefs.SetInt("resolutionIndex", SelectedRezolution);
         PlayerPrefs.Save();
     }
@@ -60,7 +61,6 @@ public class Settingsscript : MonoBehaviour
     public void SetFullscreen()
     {
         isFullscreen = Fullscreen.isOn;
-        ApplySettings();
         PlayerPrefs.SetInt("isFullscreen", isFullscreen ? 1 : 0);
         PlayerPrefs.Save();
     }
@@ -73,6 +73,29 @@ public class Settingsscript : MonoBehaviour
     public void backButton()
     {
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void SaveButton()
+    {
+        BackgroundManager.instance.ApplyBackground();
+        TextManager.instance.ApplyFont();
+        FindObjectOfType<VolumeSetting>().SetMusicVolume();
+        FindObjectOfType<Settingsscript>().ApplySettings();
+        saved = true;
+    }
+
+    public void BackToMain()
+    {
+        if (!saved)
+        {
+            meniupopup.SetActive(true);
+            GameObject.Find("Panel").SetActive(false);
+            
+        }
+        else
+        {
+            backButton();
+        }
     }
 }
 
