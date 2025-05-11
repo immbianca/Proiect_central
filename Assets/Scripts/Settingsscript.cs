@@ -16,16 +16,16 @@ public class Settingsscript : MonoBehaviour
     void Start()
     {
         AllRezolutions = Screen.resolutions;
-        List<string> resolutiomStringList = new List<string>();
+        List<string> resolutionStringList = new List<string>();
         int currentResolutionIndex = 0;
 
         for (int i = 0; i < AllRezolutions.Length; i++)
         {
             Resolution res = AllRezolutions[i];
             string resString = res.width + " x " + res.height;
-            if (!resolutiomStringList.Contains(resString))
+            if (!resolutionStringList.Contains(resString))
             {
-                resolutiomStringList.Add(resString);
+                resolutionStringList.Add(resString);
                 SelectedResolutionList.Add(res);
 
                 if (res.width == Screen.width && res.height == Screen.height)
@@ -33,7 +33,7 @@ public class Settingsscript : MonoBehaviour
             }
         }
 
-        Rezolutiedrop.AddOptions(resolutiomStringList);
+        Rezolutiedrop.AddOptions(resolutionStringList);
 
         if (PlayerPrefs.HasKey("resolutionIndex"))
             currentResolutionIndex = PlayerPrefs.GetInt("resolutionIndex");
