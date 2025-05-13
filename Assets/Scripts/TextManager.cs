@@ -1,23 +1,25 @@
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class TextManager : MonoBehaviour
 {
     public static TextManager instance;
 
     public Font[] textOptions;
-    public Text testmodify;
-
-    public int selectedTextIndex = 0;
+    private int selectedTextIndex = 0;
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
-            selectedTextIndex = PlayerPrefs.GetInt("SelectedFontIndex", 0);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -25,17 +27,23 @@ public class TextManager : MonoBehaviour
     {
         ApplyFont();
     }
+
     public void SetFont(int index)
     {
         selectedTextIndex = index;
+        ApplyFont(); // doar aplică vizual, nu salvează
+    }
+
+    public void SaveFont()
+    {
         PlayerPrefs.SetInt("SelectedFontIndex", selectedTextIndex);
         PlayerPrefs.Save();
     }
 
     public void ApplyFont()
     {
-        Text[] alLTexts = FindObjectsOfType<Text>(true);
-        foreach (Text text in alLTexts)
+        Text[] allTexts = Resources.FindObjectsOfTypeAll<Text>();
+        foreach (Text text in allTexts)
         {
             if (text != null && textOptions.Length > selectedTextIndex)
             {

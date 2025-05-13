@@ -1,45 +1,57 @@
-
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BackgroundManager : MonoBehaviour
 {
     public static BackgroundManager instance;
 
-    public Sprite[] backgroundOption;
-    public Image backgroundImage;
-
-    private int selectedBackgroundIndex=1;
+    public Sprite[] backgroundOptions;        // Setezi din Inspector imaginile de fundal
+    private int selectedBackgroundIndex = 0;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);  // Păstrează obiectul între scene
             SceneManager.sceneLoaded += OnSceneLoaded;
 
             selectedBackgroundIndex = PlayerPrefs.GetInt("BackgroundIndex", 0);
         }
+        else
+        {
+            Destroy(gameObject); // evită duplicarea
+        }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        backgroundImage=GameObject.FindWithTag("Background").GetComponent<Image>();
-        ApplyBackground();
+        ApplyBackground(); // aplică backgroundul în scena nouă
     }
 
     public void SetBackground(int index)
     {
-            selectedBackgroundIndex = index;
-            PlayerPrefs.SetInt("BackgroundIndex", selectedBackgroundIndex);
-            PlayerPrefs.Save();
+        selectedBackgroundIndex = index;
+        ApplyBackground(); // aplică fără a salva
     }
+
+    public void SaveBackground()
+    {
+        PlayerPrefs.SetInt("BackgroundIndex", selectedBackgroundIndex);
+        PlayerPrefs.Save();
+    }
+
     public void ApplyBackground()
     {
-        if (backgroundImage != null && backgroundOption.Length>selectedBackgroundIndex)
+        GameObject bgObject = GameObject.FindWithTag("Background");
+        if (bgObject != null)
         {
-            backgroundImage.sprite = backgroundOption[selectedBackgroundIndex];
+            Image backgroundImage = bgObject.GetComponent<Image>();
+            if (backgroundImage != null && backgroundOptions.Length > selectedBackgroundIndex)
+            {
+                backgroundImage.sprite = backgroundOptions[selectedBackgroundIndex];
+            }
         }
     }
 }
