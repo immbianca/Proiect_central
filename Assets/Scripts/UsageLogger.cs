@@ -2,58 +2,66 @@
 using System.IO;
 using UnityEngine;
 
-public class UsageLogger : MonoBehaviour
+public class ButtonLogger : MonoBehaviour
 {
-    private Dictionary<string, int> buttonUsage = new Dictionary<string, int>();
+    private Dictionary<string, int> buttonClicks = new Dictionary<string, int>();
     private string filePath;
 
     void Awake()
     {
         filePath = Path.Combine(Application.persistentDataPath, "button_usage.txt");
+        Debug.Log("Path to log file: " + filePath);
+        LoadCountsFromFile();
 
-        // Încarcă valorile existente dacă fișierul există deja
-        if (File.Exists(filePath))
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void LoadCountsFromFile()
+    {
+        if (!File.Exists(filePath))
+            return;
+
+        string[] lines = File.ReadAllLines(filePath);
+
+        foreach (string line in lines)
         {
-            foreach (string line in File.ReadAllLines(filePath))
+            if (string.IsNullOrWhiteSpace(line)) continue;
+
+            string[] parts = line.Split(':');
+            if (parts.Length != 2) continue;
+
+            string key = parts[0].Trim();
+            if (int.TryParse(parts[1].Trim(), out int count))
             {
-                string[] parts = line.Split(':');
-                if (parts.Length == 2)
-                {
-                    string key = parts[0].Trim();
-                    int value;
-                    if (int.TryParse(parts[1], out value))
-                        buttonUsage[key] = value;
-                }
+                buttonClicks[key] = count;
             }
         }
+
+        Debug.Log("Loaded button counts from file.");
+    }
+    public void LogButtonClick(string buttonName)
+    {
+        if (buttonClicks.ContainsKey(buttonName))
+            buttonClicks[buttonName]++;
+        else
+            buttonClicks[buttonName] = 1;
     }
 
-    public void LogFromButton(string buttonID)
+    void OnApplicationQuit()
     {
-        if (!buttonUsage.ContainsKey(buttonID))
-            buttonUsage[buttonID] = 0;
-
-        buttonUsage[buttonID]++;
-
-        SaveToFile();
+        SaveLogToFile();
     }
 
-    private void SaveToFile()
+    private void SaveLogToFile()
     {
-        List<string> lines = new List<string>();
-        foreach (var entry in buttonUsage)
+        using (StreamWriter writer = new StreamWriter(filePath, false))
         {
-            lines.Add($"{entry.Key}: {entry.Value}");
+            foreach (var entry in buttonClicks)
+            {
+                writer.WriteLine($"{entry.Key}: {entry.Value}");
+            }
         }
 
-        File.WriteAllLines(filePath, lines.ToArray());
-        File.WriteAllText(filePath, "TEST SCRIERE");
-
-    }
-
-    private void OnApplicationQuit()
-    {
-        Debug.Log("Application is quitting. Saving usage data...");
-        Debug.Log("Usage data saved to: " + filePath);
+        Debug.Log("Log saved to: " + filePath);
     }
 }

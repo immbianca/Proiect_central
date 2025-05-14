@@ -6,7 +6,7 @@ public class BackgroundManager : MonoBehaviour
 {
     public static BackgroundManager instance;
 
-    public Sprite[] backgroundOptions;        // Setezi din Inspector imaginile de fundal
+    public Sprite[] backgroundOptions;        
     private int selectedBackgroundIndex = 0;
 
     private void Awake()
@@ -14,26 +14,26 @@ public class BackgroundManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);  // Păstrează obiectul între scene
+            DontDestroyOnLoad(gameObject);  
             SceneManager.sceneLoaded += OnSceneLoaded;
 
             selectedBackgroundIndex = PlayerPrefs.GetInt("BackgroundIndex", 0);
         }
         else
         {
-            Destroy(gameObject); // evită duplicarea
+            Destroy(gameObject); 
         }
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        ApplyBackground(); // aplică backgroundul în scena nouă
+        ApplyBackground(); 
     }
 
     public void SetBackground(int index)
     {
         selectedBackgroundIndex = index;
-        ApplyBackground(); // aplică fără a salva
+        ApplyBackground(); 
     }
 
     public void SaveBackground()

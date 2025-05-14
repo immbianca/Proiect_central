@@ -8,6 +8,9 @@ public class AudioManager : MonoBehaviour
 
     [Header("------Audio Clip--------")]
     public AudioClip background;
+    public AudioClip gameSound;
+
+    private bool isGameSoundPlaying = false;
 
     private static AudioManager instance;
     private void Awake()
@@ -30,11 +33,27 @@ public class AudioManager : MonoBehaviour
     }
     public void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Game")
+        if (SceneManager.GetActiveScene().name == "Game" && !isGameSoundPlaying)
         {
-          Destroy(gameObject);
-          return;
+            if (audioSource != null && gameSound != null)
+            {
+                audioSource.Stop();
+                audioSource.clip = gameSound;
+                audioSource.Play();
+                isGameSoundPlaying = true;
+            }
         }
+        else if (SceneManager.GetActiveScene().name != "Game" && isGameSoundPlaying)
+        {
+            if (audioSource != null && background != null)
+            {
+                audioSource.Stop();
+                audioSource.clip = background;
+                audioSource.Play();
+                isGameSoundPlaying = false;
+            }
+        }
+
     }
 
 }

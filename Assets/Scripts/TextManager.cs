@@ -31,7 +31,7 @@ public class TextManager : MonoBehaviour
     public void SetFont(int index)
     {
         selectedTextIndex = index;
-        ApplyFont(); // doar aplică vizual, nu salvează
+        ApplyFont(); 
     }
 
     public void SaveFont()
