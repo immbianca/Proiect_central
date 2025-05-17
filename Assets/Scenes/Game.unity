@@ -479,7 +479,7 @@ RectTransform:
   m_GameObject: {fileID: 146710047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: -1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1409300833}
@@ -490,8 +490,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 800, y: 500}
+  m_AnchoredPosition: {x: 0, y: -14}
+  m_SizeDelta: {x: 1032.9602, y: 250.6915}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &146710049
 MonoBehaviour:
@@ -1698,6 +1698,7 @@ GameObject:
   - component: {fileID: 1001304498}
   - component: {fileID: 1001304497}
   - component: {fileID: 1001304496}
+  - component: {fileID: 1001304499}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1731,7 +1732,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &1001304497
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1800,6 +1801,19 @@ Transform:
   - {fileID: 698633293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1001304499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001304495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a249f8fb613f5524aaedcd50810a4c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viteza: 5
 --- !u!1 &1053131214
 GameObject:
   m_ObjectHideFlags: 0
@@ -2394,8 +2408,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -59.557602}
-  m_SizeDelta: {x: 381.4376, y: 119.115204}
+  m_AnchoredPosition: {x: 0.0000076293945, y: -39.1225}
+  m_SizeDelta: {x: 324.2192, y: 78.245}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1409300834
 MonoBehaviour:
@@ -2419,7 +2433,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
-    m_FontSize: 70
+    m_FontSize: 50
     m_FontStyle: 3
     m_BestFit: 0
     m_MinSize: 0
