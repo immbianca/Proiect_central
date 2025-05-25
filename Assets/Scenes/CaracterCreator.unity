@@ -256,7 +256,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
+    m_Font: {fileID: 12800000, guid: fc3cffeae5b1ad746b417f9daafce901, type: 3}
     m_FontSize: 25
     m_FontStyle: 1
     m_BestFit: 0
@@ -375,7 +375,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725004679}
+      - m_Target: {fileID: 1204661055}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: Salvare
         m_Mode: 1
@@ -691,7 +691,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
+    m_Font: {fileID: 12800000, guid: fc3cffeae5b1ad746b417f9daafce901, type: 3}
     m_FontSize: 17
     m_FontStyle: 1
     m_BestFit: 0
@@ -770,7 +770,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
+    m_Font: {fileID: 12800000, guid: fc3cffeae5b1ad746b417f9daafce901, type: 3}
     m_FontSize: 17
     m_FontStyle: 1
     m_BestFit: 0
@@ -928,7 +928,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
+    m_Font: {fileID: 12800000, guid: fc3cffeae5b1ad746b417f9daafce901, type: 3}
     m_FontSize: 17
     m_FontStyle: 1
     m_BestFit: 0
@@ -1069,7 +1069,6 @@ GameObject:
   - component: {fileID: 715819036}
   - component: {fileID: 715819035}
   - component: {fileID: 715819034}
-  - component: {fileID: 715819033}
   m_Layer: 0
   m_Name: ButtonParola
   m_TagString: Untagged
@@ -1097,20 +1096,6 @@ RectTransform:
   m_AnchoredPosition: {x: -74.2265, y: 69.787506}
   m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &715819033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 715819031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4423801ff53456a48b260cf5329d58a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputField: {fileID: 784435055}
-  resultText: {fileID: 584819100}
 --- !u!114 &715819034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1155,7 +1140,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 715819033}
+      - m_Target: {fileID: 1204661055}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: ValidatePassword
         m_Mode: 1
@@ -1262,7 +1247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d8097dab4f0961847b64a08d5dc8a1aa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e6322e5371db4c84c979993ab5f83045, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1563,7 +1548,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
+    m_Font: {fileID: 12800000, guid: fc3cffeae5b1ad746b417f9daafce901, type: 3}
     m_FontSize: 25
     m_FontStyle: 1
     m_BestFit: 0
@@ -2399,6 +2384,7 @@ GameObject:
   - component: {fileID: 1204661052}
   - component: {fileID: 1204661054}
   - component: {fileID: 1204661053}
+  - component: {fileID: 1204661055}
   m_Layer: 0
   m_Name: Panel
   m_TagString: Untagged
@@ -2480,6 +2466,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204661051}
   m_CullTransparentMesh: 1
+--- !u!114 &1204661055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204661051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de8dcff7259b8b345aa0189c18e51b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameField: {fileID: 335172780}
+  emailField: {fileID: 900898348}
+  passwordField: {fileID: 784435055}
+  resultText: {fileID: 584819100}
 --- !u!1 &1207932520
 GameObject:
   m_ObjectHideFlags: 0
@@ -2664,7 +2666,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
+    m_Font: {fileID: 12800000, guid: fc3cffeae5b1ad746b417f9daafce901, type: 3}
     m_FontSize: 25
     m_FontStyle: 1
     m_BestFit: 0
@@ -2697,7 +2699,6 @@ GameObject:
   - component: {fileID: 1265425641}
   - component: {fileID: 1265425640}
   - component: {fileID: 1265425639}
-  - component: {fileID: 1265425638}
   m_Layer: 0
   m_Name: ButtonEmail
   m_TagString: Untagged
@@ -2725,20 +2726,6 @@ RectTransform:
   m_AnchoredPosition: {x: -73.2265, y: 106.787506}
   m_SizeDelta: {x: 70, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1265425638
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1265425636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4423801ff53456a48b260cf5329d58a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputField: {fileID: 900898348}
-  resultText: {fileID: 584819100}
 --- !u!114 &1265425639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2783,7 +2770,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1265425638}
+      - m_Target: {fileID: 1204661055}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: ValidateEmail
         m_Mode: 1
@@ -3049,7 +3036,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
+    m_Font: {fileID: 12800000, guid: fc3cffeae5b1ad746b417f9daafce901, type: 3}
     m_FontSize: 35
     m_FontStyle: 1
     m_BestFit: 0
@@ -3207,7 +3194,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 12adc2b4dea0b5b47874dfc03d7c1b59, type: 3}
+    m_Font: {fileID: 12800000, guid: fc3cffeae5b1ad746b417f9daafce901, type: 3}
     m_FontSize: 17
     m_FontStyle: 1
     m_BestFit: 0
@@ -3594,7 +3581,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725004679}
+      - m_Target: {fileID: 1204661055}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: Meniu
         m_Mode: 1
@@ -3750,7 +3737,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7afb9faf681f0574c854378b2185d427, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9cb53f20c23d0e848af0569a22438a9c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3922,7 +3909,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1576695577}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 076bf6737ea4ca149a1bc4067c05899e, type: 3}
+  m_Script: {fileID: 11500000, guid: d2d8d93c500b3c341a69bc083f0763cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   caracterDropdown: {fileID: 1576695579}
@@ -3938,7 +3925,6 @@ GameObject:
   - component: {fileID: 1725004678}
   - component: {fileID: 1725004677}
   - component: {fileID: 1725004676}
-  - component: {fileID: 1725004679}
   m_Layer: 0
   m_Name: ButtonNume
   m_TagString: Untagged
@@ -4010,7 +3996,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725004679}
+      - m_Target: {fileID: 1204661055}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: ValidateName
         m_Mode: 1
@@ -4060,20 +4046,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725004674}
   m_CullTransparentMesh: 1
---- !u!114 &1725004679
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1725004674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4423801ff53456a48b260cf5329d58a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputField: {fileID: 335172780}
-  resultText: {fileID: 584819100}
 --- !u!1 &1817001323
 GameObject:
   m_ObjectHideFlags: 0
@@ -4366,7 +4338,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1725004679}
+      - m_Target: {fileID: 1204661055}
         m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
         m_MethodName: Joc
         m_Mode: 1

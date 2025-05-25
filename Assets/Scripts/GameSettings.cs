@@ -10,4 +10,10 @@ public class GameSettings : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void Replay()
+    {
+        SceneManager.LoadScene("Game");
+
+    }
 }

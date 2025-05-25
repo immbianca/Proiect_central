@@ -8,7 +8,9 @@ public class CaracterManager : MonoBehaviour
 
     public Sprite[] caracterOptions;
     private int selectedCaracterIndex = 0;
+
     private Image caracterImage;
+    private SpriteRenderer caracterSpriteRenderer;
 
     private void Awake()
     {
@@ -17,6 +19,9 @@ public class CaracterManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
+
+            // Load saved caracter
+            selectedCaracterIndex = PlayerPrefs.GetInt("CaracterIndex", 0);
         }
         else
         {
@@ -27,9 +32,13 @@ public class CaracterManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         GameObject playerObj = GameObject.FindWithTag("Player");
+
         if (playerObj != null)
         {
+            // Încearcă să obții atât Image cât și SpriteRenderer
             caracterImage = playerObj.GetComponent<Image>();
+            caracterSpriteRenderer = playerObj.GetComponent<SpriteRenderer>();
+
             ApplyCaracter();
         }
     }
@@ -37,7 +46,7 @@ public class CaracterManager : MonoBehaviour
     public void SetCaracter(int index)
     {
         selectedCaracterIndex = index;
-        ApplyCaracter(); 
+        ApplyCaracter();
     }
 
     public void SaveCaracter()
@@ -48,9 +57,17 @@ public class CaracterManager : MonoBehaviour
 
     public void ApplyCaracter()
     {
-        if (caracterImage != null && caracterOptions.Length > selectedCaracterIndex)
+        if (caracterOptions.Length > selectedCaracterIndex)
         {
-            caracterImage.sprite = caracterOptions[selectedCaracterIndex];
+            if (caracterImage != null)
+            {
+                caracterImage.sprite = caracterOptions[selectedCaracterIndex];
+            }
+
+            if (caracterSpriteRenderer != null)
+            {
+                caracterSpriteRenderer.sprite = caracterOptions[selectedCaracterIndex];
+            }
         }
     }
 }
