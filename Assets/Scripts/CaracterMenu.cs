@@ -5,14 +5,24 @@ public class CaracterMenu : MonoBehaviour
 {
     public Dropdown caracterDropdown;
 
-    void Start()
+    private void Start()
     {
+      
         int savedIndex = PlayerPrefs.GetInt("CaracterIndex", 0);
-        caracterDropdown.value = savedIndex;
-        CaracterManager.instance.SetCaracter(savedIndex);
 
-        caracterDropdown.onValueChanged.AddListener(delegate {
-            CaracterManager.instance.SetCaracter(caracterDropdown.value);
-        });
+        caracterDropdown.SetValueWithoutNotify(savedIndex);
+
+        if (CaracterManager.instance != null)
+        {
+            CaracterManager.instance.SetCaracter(savedIndex);
+        }
+        caracterDropdown.onValueChanged.AddListener(OnCaracterChanged);
+    }
+    private void OnCaracterChanged(int newIndex)
+    {
+        if (CaracterManager.instance != null)
+        {
+            CaracterManager.instance.SetCaracter(newIndex);
+        }
     }
 }

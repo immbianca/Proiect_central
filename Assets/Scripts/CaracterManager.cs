@@ -7,10 +7,13 @@ public class CaracterManager : MonoBehaviour
     public static CaracterManager instance;
 
     public Sprite[] caracterOptions;
+    public AnimatorOverrideController[] caracterAnimators;
+
     private int selectedCaracterIndex = 0;
 
     private Image caracterImage;
     private SpriteRenderer caracterSpriteRenderer;
+    private Animator animator;
 
     private void Awake()
     {
@@ -20,7 +23,6 @@ public class CaracterManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
 
-            // Load saved caracter
             selectedCaracterIndex = PlayerPrefs.GetInt("CaracterIndex", 0);
         }
         else
@@ -35,9 +37,9 @@ public class CaracterManager : MonoBehaviour
 
         if (playerObj != null)
         {
-            // Încearcă să obții atât Image cât și SpriteRenderer
             caracterImage = playerObj.GetComponent<Image>();
             caracterSpriteRenderer = playerObj.GetComponent<SpriteRenderer>();
+            animator = playerObj.GetComponent<Animator>();
 
             ApplyCaracter();
         }
@@ -45,6 +47,8 @@ public class CaracterManager : MonoBehaviour
 
     public void SetCaracter(int index)
     {
+        if (index < 0 || index >= caracterOptions.Length || index >= caracterAnimators.Length)
+            return;
         selectedCaracterIndex = index;
         ApplyCaracter();
     }
@@ -57,17 +61,17 @@ public class CaracterManager : MonoBehaviour
 
     public void ApplyCaracter()
     {
-        if (caracterOptions.Length > selectedCaracterIndex)
-        {
-            if (caracterImage != null)
-            {
-                caracterImage.sprite = caracterOptions[selectedCaracterIndex];
-            }
+        Sprite caracterSprite = caracterOptions[selectedCaracterIndex];
 
-            if (caracterSpriteRenderer != null)
-            {
-                caracterSpriteRenderer.sprite = caracterOptions[selectedCaracterIndex];
-            }
+        if (caracterImage != null)
+            caracterImage.sprite = caracterSprite;
+
+        if (caracterSpriteRenderer != null)
+            caracterSpriteRenderer.sprite = caracterSprite;
+
+        if (animator != null && caracterAnimators.Length > selectedCaracterIndex)
+        {
+            animator.runtimeAnimatorController = caracterAnimators[selectedCaracterIndex];
         }
     }
 }
