@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 32792714}
   m_Layer: 0
   m_Name: Terrain (9)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -374,7 +374,7 @@ GameObject:
   - component: {fileID: 129747527}
   m_Layer: 3
   m_Name: Terrain
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 208324375}
   m_Layer: 0
   m_Name: Terrain (15)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -786,7 +786,7 @@ GameObject:
   - component: {fileID: 209320337}
   m_Layer: 0
   m_Name: Terrain (14)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -978,7 +978,7 @@ GameObject:
   - component: {fileID: 385456647}
   m_Layer: 3
   m_Name: Terrain (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1044,7 +1044,7 @@ Transform:
   m_GameObject: {fileID: 385456644}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.956, y: 0.192, z: 0}
+  m_LocalPosition: {x: 0.959, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1315,7 +1315,7 @@ GameObject:
   - component: {fileID: 574931065}
   m_Layer: 3
   m_Name: Terrain (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1473,7 +1473,7 @@ GameObject:
   - component: {fileID: 575856650}
   m_Layer: 0
   m_Name: Terrain (16)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1879,7 +1879,7 @@ GameObject:
   - component: {fileID: 721852461}
   m_Layer: 3
   m_Name: Terrain (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2037,7 +2037,7 @@ GameObject:
   - component: {fileID: 726153665}
   m_Layer: 0
   m_Name: Terrain (13)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2274,7 +2274,7 @@ GameObject:
   - component: {fileID: 778661022}
   m_Layer: 0
   m_Name: Terrain (12)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2599,10 +2599,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a0931e2d44b8e4e8828842ca60b87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viteza: 5
+  vitezaDeMers: 5
+  fortaSaritura: 8
   gameOverUI: {fileID: 932948355}
   panelUI: {fileID: 224610758}
-  groundCheckDistance: 4
 --- !u!95 &1001304500
 Animator:
   serializedVersion: 5
@@ -2638,7 +2638,7 @@ GameObject:
   - component: {fileID: 1075970478}
   m_Layer: 3
   m_Name: Terrain (8)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3005,7 +3005,7 @@ GameObject:
   - component: {fileID: 1106503567}
   m_Layer: 3
   m_Name: Terrain (9)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3084,7 +3084,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.70915264, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -3095,7 +3095,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48, y: 0.48}
+  m_Size: {x: 1.8983053, y: 0.48}
   m_EdgeRadius: 0
 --- !u!212 &1106503569
 SpriteRenderer:
@@ -3795,7 +3795,7 @@ GameObject:
   - component: {fileID: 1591160786}
   m_Layer: 3
   m_Name: Terrain (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3953,7 +3953,7 @@ GameObject:
   - component: {fileID: 1663215879}
   m_Layer: 3
   m_Name: Terrain (7)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4111,7 +4111,7 @@ GameObject:
   - component: {fileID: 1688009136}
   m_Layer: 0
   m_Name: Terrain (10)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4473,7 +4473,7 @@ GameObject:
   - component: {fileID: 1837697145}
   m_Layer: 0
   m_Name: Terrain (11)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4754,7 +4754,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 61565eab33c0c0a448b7c88fc58158b0, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4762,7 +4762,7 @@ SpriteRenderer:
   m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &1870268489
@@ -4775,7 +4775,7 @@ Animator:
   m_GameObject: {fileID: 1870268487}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fe385d454e35bd745a91f8ada0b87514, type: 2}
+  m_Controller: {fileID: 9100000, guid: 01cf0a990a23a9349ad81db0cfcc67f1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4815,7 +4815,7 @@ GameObject:
   - component: {fileID: 1976084864}
   m_Layer: 0
   m_Name: Terrain (10)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5182,7 +5182,7 @@ GameObject:
   - component: {fileID: 2142839248}
   m_Layer: 3
   m_Name: Terrain (7)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
