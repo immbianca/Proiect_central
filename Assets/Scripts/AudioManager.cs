@@ -5,14 +5,20 @@ public class AudioManager : MonoBehaviour
 {
     [Header("------Audio Source-------")]
     [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioSource SFXSource;
 
     [Header("------Audio Clip--------")]
     public AudioClip background;
     public AudioClip gameSound;
+    public AudioClip jumpSound;
+    public AudioClip attackSound;
+    public AudioClip hurtSound;
+    public AudioClip deathSound;
 
     private bool isGameSoundPlaying = false;
 
-    private static AudioManager instance;
+    public static AudioManager instance;
+    
     private void Awake()
     {
         if (instance == null)
@@ -56,4 +62,11 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    public void PlaySFX(AudioClip clip)
+    {
+        if (SFXSource != null && clip != null)
+        {
+            SFXSource.PlayOneShot(clip);
+        }
+    }
 }

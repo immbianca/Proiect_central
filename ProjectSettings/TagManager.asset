@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Background
   - Ground
+  - Spikes
+  - NPC
+  - NLC
   layers:
   - Default
   - TransparentFX
