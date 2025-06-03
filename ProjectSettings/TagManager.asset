@@ -9,6 +9,8 @@ TagManager:
   - Spikes
   - NPC
   - NLC
+  - Enemy
+  - Win
   layers:
   - Default
   - TransparentFX

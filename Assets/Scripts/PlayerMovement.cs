@@ -1,114 +1,177 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed;
-    [SerializeField] private GameObject gameOverUI;
-    [SerializeField] private GameObject panelUI;
-    [SerializeField] private GameObject npcUI;
-    private Rigidbody2D corp;
-    private Animator animatie;
-    private bool grounded;
+    public float speed = 5f;
+    public float jumpForce = 10f;
 
-    private void Awake()
+    public GameObject gameOverUI;
+    public GameObject panelUI;
+    public GameObject npcUI;
+    public GameObject winUI;
+
+    private Rigidbody2D rb;
+    private Animator animator;
+    private bool grounded = true;
+    private bool isDead = false;
+
+    private bool isBlocking = false;
+    private bool isAttacking = false;
+
+    void Awake()
     {
-        corp = GetComponent<Rigidbody2D>();
-        animatie = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
-        float orizontal = Input.GetAxis("Horizontal");
-        corp.velocity = new Vector2(orizontal * speed, corp.velocity.y);
+        if (isDead) return;
 
-        if (orizontal > 0.01f)
+        float horizontal = Input.GetAxis("Horizontal");
+        rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+
+        if (horizontal > 0.01f)
             transform.localScale = new Vector3(0.7f, 0.7f, 1);
-        else if (orizontal < -0.01f)
+        else if (horizontal < -0.01f)
             transform.localScale = new Vector3(-0.7f, 0.7f, 1);
+
+        animator.SetBool("walk", Mathf.Abs(horizontal) > 0.01f);
+        animator.SetBool("ground", grounded);
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             Jump();
         }
 
-        animatie.SetBool("walk", orizontal != 0);
-
-
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            animatie.SetTrigger("block");
-            AudioManager.instance.PlaySFX(AudioManager.instance.attackSound);
+            isBlocking = true;
+            animator.SetTrigger("block");
+            StartCoroutine(ResetBlock());
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            animatie.SetTrigger("attack");
-            AudioManager.instance.PlaySFX(AudioManager.instance.attackSound);
+            isAttacking = true;
+            animator.SetTrigger("attack");
+            StartCoroutine(ResetAttack());
         }
 
-
-        animatie.SetBool("ground", grounded);
-
-      
         if (transform.position.y < -10f)
         {
-            gameOverUI.SetActive(true);
-            panelUI.SetActive(false);
+            Die();
+        }
+    }
+
+    private IEnumerator ResetBlock()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isBlocking = false;
+    }
+
+    private IEnumerator ResetAttack()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isAttacking = false;
+    }
+
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        animator.SetTrigger("jump");
+        grounded = false;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            grounded = true;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (isDead) return;
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyMovement enemy = collision.gameObject.GetComponent<EnemyMovement>();
+            if (enemy == null) return;
+
+            if (isAttacking && !enemy.IsDead())
+            {
+                enemy.Die();
+            }
+            else if (enemy.IsAttacking() && !isBlocking && !isDead)
+            {
+                Die();
+            }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Spikes")
+        if (collision.CompareTag("Spikes"))
         {
-            AudioManager.instance.PlaySFX(AudioManager.instance.deathSound);
-            StartCoroutine(HandleDeath());
+            Die();
         }
 
-        if (collision.gameObject.tag == "NPC")
+        if (collision.CompareTag("NPC"))
         {
-            npcUI.SetActive(true);
-
+            if (npcUI != null) npcUI.SetActive(true);
         }
 
-        if (collision.gameObject.tag == "NLC")
+        if (collision.CompareTag("NLC"))
         {
             SceneManager.LoadScene("Level1");
-
         }
 
+        if (collision.CompareTag("Win"))
+        {
+            if (winUI != null) winUI.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
+    
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("NPC"))
         {
-            npcUI.SetActive(false);
+            if (npcUI != null) npcUI.SetActive(false);
         }
+    }
+
+    public void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+        animator.SetTrigger("die");
+        StartCoroutine(HandleDeath());
     }
 
     private IEnumerator HandleDeath()
     {
-        animatie.SetTrigger("die");
-        gameOverUI.SetActive(true);
         yield return new WaitForSecondsRealtime(0.75f);
+        if (gameOverUI != null) gameOverUI.SetActive(true);
+        if (panelUI != null) panelUI.SetActive(false);
         Time.timeScale = 0f;
     }
 
-    private void Jump()
+    public bool IsAttacking()
     {
-        corp.velocity = new Vector2(corp.velocity.x, 10.3f);
-        animatie.SetTrigger("jump");
-        AudioManager.instance.PlaySFX(AudioManager.instance.jumpSound);
-        grounded = false;
+        return isAttacking;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public bool IsBlocking()
     {
-        if (collision.gameObject.tag == "Ground")
-            grounded = true;
+        return isBlocking;
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }

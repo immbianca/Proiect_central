@@ -325,6 +325,7 @@ MonoBehaviour:
   attackSound: {fileID: 8300000, guid: b73b032c640c1ea4485c11f34d66cea9, type: 3}
   hurtSound: {fileID: 8300000, guid: 3bc3703d6c497644eb34d6e18e051f0b, type: 3}
   deathSound: {fileID: 8300000, guid: ccdae30500eba134eaa143474bd972b8, type: 3}
+  enemySound: {fileID: 8300000, guid: 7ed2f8c26a61e9742b7e87ff20599fb4, type: 3}
 --- !u!1 &232973239
 GameObject:
   m_ObjectHideFlags: 0
