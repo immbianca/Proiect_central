@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 5f;
-    public float jumpForce = 10f;
+    public float jumpForce = 11f;
 
     public GameObject gameOverUI;
     public GameObject panelUI;
@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             isBlocking = true;
+            AudioManager.instance.PlaySFX(AudioManager.instance.attackSound);
             animator.SetTrigger("block");
             StartCoroutine(ResetBlock());
         }
@@ -56,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             isAttacking = true;
+            AudioManager.instance.PlaySFX(AudioManager.instance.attackSound);
             animator.SetTrigger("attack");
             StartCoroutine(ResetAttack());
         }
@@ -81,6 +83,7 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        AudioManager.instance.PlaySFX(AudioManager.instance.jumpSound);
         animator.SetTrigger("jump");
         grounded = false;
     }
@@ -130,8 +133,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.CompareTag("Win"))
         {
+            AudioManager.instance.PlaySFX(AudioManager.instance.winSound);
             if (winUI != null) winUI.SetActive(true);
             Time.timeScale = 0f;
+        }
+
+        if (collision.CompareTag("Enemy"))
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.hurtSound);
         }
     }
     
@@ -148,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+        AudioManager.instance.PlaySFX(AudioManager.instance.deathSound);
         animator.SetTrigger("die");
         StartCoroutine(HandleDeath());
     }

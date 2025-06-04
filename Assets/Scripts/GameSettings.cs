@@ -13,7 +13,7 @@ public class GameSettings : MonoBehaviour
 
     public void Replay()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
     }
 }

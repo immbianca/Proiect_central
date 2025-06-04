@@ -16,7 +16,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (isDead || player == null) return;
 
-        if (transform.position.y < -10f)
+        if (transform.position.y < -7f)
         {
             Die();
             return;
@@ -61,6 +61,12 @@ public class EnemyMovement : MonoBehaviour
     {
         if (isDead) return;
 
+        if (collision.gameObject.CompareTag("Spikes"))
+        {
+            AudioManager.instance.PlaySFX(AudioManager.instance.deathSound);
+            Die();
+        }
+
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerMovement playerScript = collision.gameObject.GetComponent<PlayerMovement>();
@@ -68,6 +74,7 @@ public class EnemyMovement : MonoBehaviour
 
             if (playerScript.IsAttacking() && !isDead)
             {
+                AudioManager.instance.PlaySFX(AudioManager.instance.deathSound);
                 Die();
             }
             else if (isAttacking && !playerScript.IsAttacking() && !playerScript.IsDead())
@@ -89,13 +96,12 @@ public class EnemyMovement : MonoBehaviour
 
     public void Die()
     {
+
         if (isDead) return;
         Win.SetActive(true);
         isDead = true;
         animator.SetTrigger("die");
         moveSpeed = 0f;
-
-        Destroy(gameObject, 2f);
 
     }
 }

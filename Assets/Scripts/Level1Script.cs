@@ -9,6 +9,18 @@ public class Level1Script : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera cameraPlayer;
     [SerializeField] private CinemachineVirtualCamera cameraEnemy;
 
+    private void Awake()
+    {
+        if (CaracterManager.instance != null)
+        {
+            CaracterManager.instance.ApplyCaracterTo(gameObject);
+        }
+        else
+        {
+            Debug.LogWarning("CaracterManager instance is not set. Ensure it is initialized before using Level1Script.");
+        }
+    }
+
     private async void Start()
     {
         if (cameraPlayer != null && cameraEnemy != null)

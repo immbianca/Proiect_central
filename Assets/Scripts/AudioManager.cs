@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip hurtSound;
     public AudioClip deathSound;
     public AudioClip enemySound;
+    public AudioClip winSound;
 
     private bool isGameSoundPlaying = false;
 

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.Collections;
 
 public class CaracterManager : MonoBehaviour
 {
@@ -12,7 +13,6 @@ public class CaracterManager : MonoBehaviour
     private int selectedCaracterIndex = 0;
 
     private Image caracterImage;
-    private SpriteRenderer caracterSpriteRenderer;
     private Animator animator;
 
     private void Awake()
@@ -25,23 +25,21 @@ public class CaracterManager : MonoBehaviour
 
             selectedCaracterIndex = PlayerPrefs.GetInt("CaracterIndex", 0);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        GameObject playerObj = GameObject.FindWithTag("Player");
+        StartCoroutine(DelayedApply());
+    }
 
+    IEnumerator DelayedApply()
+    {
+        yield return null;
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
         if (playerObj != null)
         {
-            caracterImage = playerObj.GetComponent<Image>();
-            caracterSpriteRenderer = playerObj.GetComponent<SpriteRenderer>();
-            animator = playerObj.GetComponent<Animator>();
-
-            ApplyCaracter();
+            ApplyCaracterTo(playerObj);
         }
     }
 
@@ -49,8 +47,15 @@ public class CaracterManager : MonoBehaviour
     {
         if (index < 0 || index >= caracterOptions.Length || index >= caracterAnimators.Length)
             return;
+
         selectedCaracterIndex = index;
-        ApplyCaracter();
+        SaveCaracter();
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            ApplyCaracterTo(playerObj);
+        }
     }
 
     public void SaveCaracter()
@@ -59,15 +64,20 @@ public class CaracterManager : MonoBehaviour
         PlayerPrefs.Save();
     }
 
+    public void ApplyCaracterTo(GameObject playerObj)
+    {
+        caracterImage = playerObj.GetComponent<Image>();
+        animator = playerObj.GetComponent<Animator>();
+
+        ApplyCaracter();
+    }
+
     public void ApplyCaracter()
     {
         Sprite caracterSprite = caracterOptions[selectedCaracterIndex];
 
         if (caracterImage != null)
             caracterImage.sprite = caracterSprite;
-
-        if (caracterSpriteRenderer != null)
-            caracterSpriteRenderer.sprite = caracterSprite;
 
         if (animator != null && caracterAnimators.Length > selectedCaracterIndex)
         {
