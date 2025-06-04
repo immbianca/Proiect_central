@@ -17,10 +17,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip enemySound;
     public AudioClip winSound;
 
-    private bool isGameSoundPlaying = false;
-
     public static AudioManager instance;
-    
+
     private void Awake()
     {
         if (instance == null)
@@ -29,39 +27,54 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-    public void Start()
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void Start()
+    {
+        PlayBackground();
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "Game" || scene.name == "Level1")
+        {
+            PlayGameSound();
+        }
+        else
+        {
+            PlayBackground();
+        }
+    }
+
+    private void PlayBackground()
     {
         if (audioSource != null && background != null)
         {
+            audioSource.Stop();
             audioSource.clip = background;
             audioSource.loop = true;
             audioSource.Play();
         }
-
     }
-    public void Update()
-    {
-        if (SceneManager.GetActiveScene().name == "Game" && !isGameSoundPlaying)
-        {
-            if (audioSource != null && gameSound != null)
-            {
-                audioSource.Stop();
-                audioSource.clip = gameSound;
-                audioSource.Play();
-                isGameSoundPlaying = true;
-            }
-        }
-        else if (SceneManager.GetActiveScene().name != "Game" && isGameSoundPlaying)
-        {
-            if (audioSource != null && background != null)
-            {
-                audioSource.Stop();
-                audioSource.clip = background;
-                audioSource.Play();
-                isGameSoundPlaying = false;
-            }
-        }
 
+    private void PlayGameSound()
+    {
+        if (audioSource != null && gameSound != null)
+        {
+            audioSource.Stop();
+            audioSource.clip = gameSound;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
     }
 
     public void PlaySFX(AudioClip clip)

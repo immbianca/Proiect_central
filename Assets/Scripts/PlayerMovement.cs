@@ -16,14 +16,28 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private bool grounded = true;
     private bool isDead = false;
-
     private bool isBlocking = false;
     private bool isAttacking = false;
 
-    void Awake()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+    
+        if (animator.runtimeAnimatorController == null)
+        {
+            Debug.LogWarning("Animator RuntimeAnimatorController missing! Please assign one.");
+        }
+    }
+
+    private void Start()
+    {
+      
+        if (CaracterManager.instance != null)
+        {
+            CaracterManager.instance.ApplyCaracter();
+        }
     }
 
     void Update()
@@ -49,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z))
         {
             isBlocking = true;
-            AudioManager.instance.PlaySFX(AudioManager.instance.attackSound);
+            AudioManager.instance?.PlaySFX(AudioManager.instance.attackSound);
             animator.SetTrigger("block");
             StartCoroutine(ResetBlock());
         }
@@ -57,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             isAttacking = true;
-            AudioManager.instance.PlaySFX(AudioManager.instance.attackSound);
+            AudioManager.instance?.PlaySFX(AudioManager.instance.attackSound);
             animator.SetTrigger("attack");
             StartCoroutine(ResetAttack());
         }
@@ -83,12 +97,12 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        AudioManager.instance.PlaySFX(AudioManager.instance.jumpSound);
+        AudioManager.instance?.PlaySFX(AudioManager.instance.jumpSound);
         animator.SetTrigger("jump");
         grounded = false;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
             grounded = true;
@@ -133,17 +147,16 @@ public class PlayerMovement : MonoBehaviour
 
         if (collision.CompareTag("Win"))
         {
-            AudioManager.instance.PlaySFX(AudioManager.instance.winSound);
+            AudioManager.instance?.PlaySFX(AudioManager.instance.winSound);
             if (winUI != null) winUI.SetActive(true);
             Time.timeScale = 0f;
         }
 
         if (collision.CompareTag("Enemy"))
         {
-            AudioManager.instance.PlaySFX(AudioManager.instance.hurtSound);
+            AudioManager.instance?.PlaySFX(AudioManager.instance.hurtSound);
         }
     }
-    
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -157,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-        AudioManager.instance.PlaySFX(AudioManager.instance.deathSound);
+        AudioManager.instance?.PlaySFX(AudioManager.instance.deathSound);
         animator.SetTrigger("die");
         StartCoroutine(HandleDeath());
     }

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using Cinemachine;
 
 public class EnemyMovement : MonoBehaviour
 {
@@ -11,6 +13,10 @@ public class EnemyMovement : MonoBehaviour
 
     private bool isDead = false;
     private bool isAttacking = false;
+
+    [Header("Cinemachine Cameras")]
+    public CinemachineVirtualCamera enemyCam;
+    public CinemachineVirtualCamera playerCam;
 
     void Update()
     {
@@ -96,12 +102,29 @@ public class EnemyMovement : MonoBehaviour
 
     public void Die()
     {
-
         if (isDead) return;
+
         Win.SetActive(true);
         isDead = true;
+        AudioManager.instance.PlaySFX(AudioManager.instance.deathSound);
         animator.SetTrigger("die");
         moveSpeed = 0f;
 
+        if (enemyCam != null && playerCam != null)
+        {
+            enemyCam.Priority = 20;
+            playerCam.Priority = 10;
+            StartCoroutine(ResetCameraPriority());
+        }
+    }
+
+    private IEnumerator ResetCameraPriority()
+    {
+        yield return new WaitForSeconds(2f);
+        if (enemyCam != null && playerCam != null)
+        {
+            enemyCam.Priority = 10;
+            playerCam.Priority = 20;
+        }
     }
 }

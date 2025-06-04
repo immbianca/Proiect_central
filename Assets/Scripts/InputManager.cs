@@ -108,10 +108,6 @@ public class InputManager : MonoBehaviour
     {
         SceneManager.LoadScene("MainMenu");
     }
-    public void Joc()
-    {
-        SceneManager.LoadScene("Game");
-    }
 
     private void Awake()
     {
